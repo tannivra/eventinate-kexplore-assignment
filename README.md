@@ -1,6 +1,6 @@
 # Evently Event Management
 
-Evently is a responsive event discovery and registration website built with Svelte, Vite, and Tailwind CSS. Users can browse Indian events, search and filter the catalogue, view event details, register for tickets, and manage saved digital passes.
+Evently is a responsive event discovery and registration website built with Svelte, Vite, and Tailwind CSS. Users can browse events, search and filter the catalogue, view event details, register for tickets, and manage saved digital passes.
 
 ## Features
 
@@ -48,12 +48,3 @@ npm run preview
 - `src/components` contains reusable UI components.
 - `src/data/events.js` contains the event catalogue.
 - `src/lib/tickets.js` manages tickets stored under `kexplore_tickets` in Local Storage.
-
-## Deployment
-
-The production output can be deployed to Vercel, Netlify, or GitHub Pages after connecting the repository. Use `npm run build` as the build command and `dist` as the output directory.
-
-## Submission Links
-
-- GitHub repository: add the repository URL here.
-- Deployed website: add the Vercel, Netlify, or GitHub Pages URL here.
