@@ -2,6 +2,8 @@
 
 Eventinate is a modern, responsive event discovery and registration website built with Svelte 5, Vite, and Tailwind CSS. Users can browse curated events, search and filter the catalogue, view rich event details with live countdowns, register for passes with instant validation, and manage their local digital ticket wallet.
 
+This is a demo project made for my K-Explore elective "Web Design".
+
 ## Features
 
 - **Home Page**: Featured and upcoming events showcase, instant search handoff, and responsive layout.
