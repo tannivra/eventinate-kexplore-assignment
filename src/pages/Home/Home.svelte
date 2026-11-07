@@ -1,0 +1,74 @@
+<script>
+    import Icon from '@iconify/svelte'
+    import { link, push } from "svelte-spa-router";
+    import Button from '../../components/Button/Button.svelte'
+    import EventCard from '../../components/EventCard/EventCard.svelte'
+    import { featuredEvents, upcomingEvents } from '../../data/events.js'
+
+    let searchQuery = ''
+
+    function searchEvents() {
+        const query = searchQuery.trim()
+        push(query ? `/events?search=${encodeURIComponent(query)}` : '/events')
+    }
+</script>
+
+<svelte:head>
+  <title>Home | Evently</title>
+</svelte:head>
+
+<div class="flex flex-col gap-y-16 mx-auto max-w-[calc(100vw-250px)]">
+    <section class="relative mx-auto flex w-full items-center justify-center text-center my-32">
+        <div class="flex flex-col items-center gap-y-4 w-full">
+            <h1 class="text-5xl font-bold tracking-tight leading-[1.15] text-foreground max-w-[500px]">
+                Discover events worth
+                showing up for.
+            </h1>
+            <form class="relative mt-6 w-[55%]" onsubmit={(event) => { event.preventDefault(); searchEvents() }}>
+                <Icon
+                    icon="lucide:search"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                    class="pointer-events-none absolute left-7 top-1/2 -translate-y-1/2 text-muted-foreground z-1"
+                />
+                <input
+                    type="text"
+                    placeholder="Search events..."
+                    bind:value={searchQuery}
+                    class="h-[64px] w-full rounded-full border border-border/30 bg-card/50 py-2 pl-18 pr-20 text-md text-foreground placeholder:text-muted-foreground shadow-lg shadow-black/10 backdrop-blur-md focus:border-border/60 focus:outline-none"
+                />
+            </form>
+        </div>
+    </section>
+
+    <section class="space-y-6">
+        <div class="flex justify-between items-center gap-x-4">
+            <h2 class="text-xl font-semibold text-foreground">Featured</h2>
+            <a href="/events" use:link class="text-sm font-medium text-primary hover:underline">
+                All Featured
+                <Icon icon="material-symbols:arrow-outward-rounded" width="18" height="18" class="inline-block ml-1" />
+            </a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {#each featuredEvents.slice(0, 4) as event}
+                <EventCard {event} />
+            {/each}
+        </div>
+    </section>
+
+    <section class="space-y-6 pb-20">
+        <div class="flex justify-between items-center gap-x-4">
+            <h2 class="text-xl font-semibold text-foreground">Upcoming</h2>
+            <a href="/events" use:link class="text-sm font-medium text-primary hover:underline">
+                All Upcoming
+                <Icon icon="material-symbols:arrow-outward-rounded" width="18" height="18" class="inline-block ml-1" />
+            </a>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {#each upcomingEvents.slice(0, 4) as event}
+                <EventCard {event} />
+            {/each}
+        </div>
+    </section>
+</div>
