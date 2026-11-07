@@ -2,12 +2,13 @@
     import Icon from '@iconify/svelte'
     import { link } from 'svelte-spa-router'
     import TicketConfirmation from '../../components/TicketConfirmation/TicketConfirmation.svelte'
-    import { getEventById } from '../../data/events.js'
+    import { getEventById, isEventPast } from '../../data/events.js'
     import { saveTicket } from '../../lib/tickets.js'
 
     export let params = {}
 
     $: event = params?.id ? getEventById(params.id) : null
+    $: past = isEventPast(event)
 
     let fullName = ''
     let email = ''
@@ -123,7 +124,18 @@
         </button>
     </div>
 
-    {#if isSuccess && event}
+    {#if event && past}
+        <div class="mx-auto max-w-md py-24 text-center">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-border/30 bg-surface-raised/50 text-muted-foreground">
+                <Icon icon="lucide:calendar-x-2" width="32" height="32" />
+            </div>
+            <h1 class="text-3xl font-bold text-foreground">Event passed</h1>
+            <p class="mt-3 text-sm text-muted-foreground">Registration and ticket purchases are closed for this event.</p>
+            <a href="/events" use:link class="mt-8 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">
+                Browse Current Events
+            </a>
+        </div>
+    {:else if isSuccess && event}
         <TicketConfirmation
             {event}
             {fullName}

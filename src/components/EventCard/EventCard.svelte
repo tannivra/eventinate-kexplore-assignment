@@ -1,14 +1,17 @@
 <script>
   import Icon from '@iconify/svelte'
   import { link } from "svelte-spa-router";
+  import { isEventPast } from '../../data/events.js'
   export let event
   export let animated = true
+
+  $: past = isEventPast(event)
 </script>
 
 <a
   href={`/event/${event.id}`}
   use:link
-  class={`group block overflow-hidden rounded-4xl bg-card/60 backdrop-blur-md border border-border/30 text-card-foreground shadow-sm ${animated ? 'transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-card/75' : ''}`}
+  class={`group block overflow-hidden rounded-4xl bg-card/60 backdrop-blur-md border border-border/30 text-card-foreground shadow-sm ${past ? 'grayscale opacity-60' : ''} ${animated && !past ? 'transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-card/75' : ''}`}
 >
   <div class="relative aspect-[4/5] overflow-hidden" style={`background: ${event.gradient}`}>
     <img
@@ -38,7 +41,7 @@
   <div class="flex justify-between p-5">
      <div class="min-w-0">
        <div class="flex flex-col gap-y-1 mb-2">
-         <p class="text-xs font-medium text-primary">{event.date}</p>
+          <p class={`text-xs font-medium ${past ? 'text-muted-foreground' : 'text-primary'}`}>{past ? 'Event passed' : event.date}</p>
          <h3 class="truncate text-lg font-semibold tracking-tight" title={event.title}>{event.title}</h3>
       </div>
       <div class="flex items-center justify-between gap-3">

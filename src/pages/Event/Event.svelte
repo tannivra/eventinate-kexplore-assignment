@@ -2,11 +2,12 @@
     import Icon from '@iconify/svelte'
     import { onMount } from 'svelte'
     import { link } from 'svelte-spa-router'
-    import { getEventById } from '../../data/events.js'
+    import { getEventById, isEventPast } from '../../data/events.js'
 
     export let params = {}
 
     $: event = getEventById(params.id)
+    $: past = isEventPast(event)
     let countdown = ''
     let isSaved = false
     let shareMessage = ''
@@ -90,7 +91,7 @@
     </div>
 
     <!-- Hero cover image -->
-    <div class="relative h-[260px] sm:h-[340px] md:h-[420px] w-full overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-4xl" style={`background: ${event.gradient}`}>
+    <div class={`relative h-[260px] sm:h-[340px] md:h-[420px] w-full overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-4xl ${past ? 'grayscale' : ''}`} style={`background: ${event.gradient}`}>
         <img
             src={event.cover}
             alt={event.title}
@@ -158,7 +159,7 @@
                 <div>
                     <p class="text-xs sm:text-sm text-muted-foreground">Price</p>
                     <p class="mt-1 text-2xl sm:text-3xl font-bold text-foreground">
-                        {event.price === 0 ? 'Free' : `₹${event.price.toLocaleString('en-IN')}`}
+                        {past ? 'Event passed' : event.price === 0 ? 'Free' : `₹${event.price.toLocaleString('en-IN')}`}
                     </p>
                     <p class="mt-2 text-xs font-medium text-primary">{countdown}</p>
                 </div>
@@ -177,13 +178,19 @@
                     </div>
                 </div>
 
-                <a
-                    href={`/register/${event.id}`}
-                    use:link
-                    class="block text-center w-full rounded-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 cursor-pointer"
-                >
-                    {event.price === 0 ? 'Register for Free' : 'Get Tickets'}
-                </a>
+                {#if past}
+                    <div class="w-full rounded-full border border-border/30 bg-surface-raised/50 py-3.5 text-center text-sm font-semibold text-muted-foreground">
+                        Event passed
+                    </div>
+                {:else}
+                    <a
+                        href={`/register/${event.id}`}
+                        use:link
+                        class="block w-full cursor-pointer rounded-full bg-primary py-3.5 text-center text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                    >
+                        {event.price === 0 ? 'Register for Free' : 'Get Tickets'}
+                    </a>
+                {/if}
 
                 <div class="flex items-center justify-center gap-4 pt-2">
                      <button onclick={toggleSaved} class="inline-flex cursor-pointer items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground">

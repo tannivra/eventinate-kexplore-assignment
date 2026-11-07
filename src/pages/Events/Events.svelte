@@ -11,7 +11,7 @@
   const categoryOptions = ['All Categories', ...new Set(events.map((event) => event.category))]
     .map((category) => ({ label: category, value: category, count: categoryCount(category) }))
   const sortOptions = [
-    { label: 'Date', value: 'date' },
+    { label: 'Newest', value: 'date' },
     { label: 'Name', value: 'name' },
     { label: 'Price: low to high', value: 'price-ascending' },
     { label: 'Price: high to low', value: 'price-descending' }
@@ -34,11 +34,10 @@
     return matchesCategory && matchesSearch
   })
   $: sortedEvents = [...filteredEvents].sort((a, b) => {
-    if (Boolean(a.featured) !== Boolean(b.featured)) return a.featured ? -1 : 1
     if (selectedSort === 'name') return a.title.localeCompare(b.title)
     if (selectedSort === 'price-ascending') return a.price - b.price
     if (selectedSort === 'price-descending') return b.price - a.price
-    return a.dateOrder - b.dateOrder
+    return b.dateOrder - a.dateOrder
   })
 </script>
 
