@@ -31,10 +31,10 @@
     <title>My Tickets ({tickets.length}) | Eventinate</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-[calc(100vw-220px)] pb-24" style="animation: fade-in-up 0.5s ease-out both;">
+<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24" style="animation: fade-in-up 0.5s ease-out both;">
     <!-- Page Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/20">
-        <div class="space-y-3">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/20">
+        <div class="space-y-2 sm:space-y-3">
             <div class="flex items-center gap-3">
                 {#if tickets.length > 0}
                     <span class="rounded-full bg-surface-raised/70 px-2.5 py-0.5 text-xs font-semibold text-muted-foreground border border-border/30">
@@ -42,18 +42,18 @@
                     </span>
                 {/if}
             </div>
-            <h1 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
                 My Tickets
             </h1>
-            <p class="text-sm text-muted-foreground max-w-xl">
+            <p class="text-xs sm:text-sm text-muted-foreground max-w-xl">
                 All your confirmed event registrations and digital admission passes stored securely on your browser.
             </p>
         </div>
 
         {#if tickets.length > 0}
-            <div class="flex items-center gap-3">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
                 <!-- Search bar if multiple tickets -->
-                <div class="relative w-full md:w-72">
+                <div class="relative w-full sm:w-72">
                     <Icon icon="lucide:search" width="16" height="16" class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
                     <input
                         type="text"
@@ -65,7 +65,7 @@
                 <a
                     href="/events"
                     use:link
-                    class="hidden sm:inline-flex items-center gap-2 rounded-full border border-border/40 bg-card/60 backdrop-blur-md px-5 py-2.5 text-xs font-semibold text-foreground transition-colors hover:bg-card/90 shrink-0"
+                    class="hidden sm:inline-flex items-center justify-center gap-2 rounded-full border border-border/40 bg-card/60 backdrop-blur-md px-5 py-2.5 text-xs font-semibold text-foreground transition-colors hover:bg-card/90 shrink-0"
                 >
                     <Icon icon="lucide:compass" width="15" height="15" />
                     Find More Events
@@ -77,12 +77,12 @@
     <!-- Main Content -->
     {#if tickets.length === 0}
         <!-- Empty State -->
-        <div class="mx-auto flex max-w-md flex-col items-center justify-center py-28 text-center" style="animation: fade-in-up 0.5s ease-out both;">
+        <div class="mx-auto flex max-w-md flex-col items-center justify-center py-20 sm:py-28 text-center" style="animation: fade-in-up 0.5s ease-out both;">
             <div class="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl border border-border/30 bg-card/60 backdrop-blur-md text-muted-foreground shadow-lg">
                 <Icon icon="lucide:ticket" width="40" height="40" />
             </div>
-            <h2 class="text-2xl font-bold text-foreground">No tickets booked yet</h2>
-            <p class="mt-2 text-sm text-muted-foreground max-w-sm leading-relaxed">
+            <h2 class="text-xl sm:text-2xl font-bold text-foreground">No tickets booked yet</h2>
+            <p class="mt-2 text-xs sm:text-sm text-muted-foreground max-w-sm leading-relaxed">
                 You haven't registered for any events yet. When you register, your admission passes and booking details will appear right here.
             </p>
             <a
@@ -110,18 +110,18 @@
 
     {:else}
         <!-- Ticket Grid -->
-        <div class="mt-10 grid grid-cols-1 gap-8 xl:grid-cols-2">
+        <div class="mt-8 sm:mt-10 grid grid-cols-1 gap-6 sm:gap-8 xl:grid-cols-2">
             {#each filteredTickets as ticket (ticket.ticketId)}
-                <div class="relative overflow-hidden rounded-3xl border border-border/40 bg-card/75 text-left shadow-2xl backdrop-blur-md transition-all hover:border-border/60">
+                <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/40 bg-card/75 text-left shadow-2xl backdrop-blur-md transition-all hover:border-border/60">
                     <!-- Ticket Header Banner -->
-                    <div class="relative p-6 sm:p-7" style={`background: ${ticket.event?.gradient || 'linear-gradient(135deg, #312e81, #4f46e5)'}`}>
+                    <div class="relative p-5 sm:p-7" style={`background: ${ticket.event?.gradient || 'linear-gradient(135deg, #312e81, #4f46e5)'}`}>
                         <div class="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
-                        <div class="relative z-1 flex items-start justify-between gap-4 text-white">
-                            <div class="space-y-2">
+                        <div class="relative z-1 flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 text-white">
+                            <div class="space-y-1.5 sm:space-y-2">
                                 <span class="inline-block rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs font-medium backdrop-blur-sm">
                                     {ticket.event?.category || 'Event Pass'}
                                 </span>
-                                <h3 class="text-xl sm:text-2xl font-bold leading-tight line-clamp-1">
+                                <h3 class="text-lg sm:text-2xl font-bold leading-tight line-clamp-1">
                                     <a href={`/event/${ticket.event?.id}`} use:link class="hover:underline">
                                         {ticket.event?.title}
                                     </a>
@@ -132,8 +132,8 @@
                                 </div>
                             </div>
 
-                            <div class="shrink-0 text-right space-y-1">
-                                <span class="inline-block rounded-lg border border-white/15 bg-black/40 px-3 py-1 font-mono text-xs font-bold tracking-wider backdrop-blur-sm">
+                            <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                                <span class="inline-block rounded-lg border border-white/15 bg-black/40 px-2.5 sm:px-3 py-1 font-mono text-xs font-bold tracking-wider backdrop-blur-sm">
                                     {ticket.ticketId}
                                 </span>
                                 <p class="text-[11px] font-semibold uppercase tracking-wider text-white/80">
@@ -144,15 +144,15 @@
                     </div>
 
                     <!-- Perforated Tear Line with cutouts -->
-                    <div class="relative flex items-center justify-between border-y border-dashed border-border/40 bg-surface-raised/40 px-6 py-2.5">
-                        <span class="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Digital Access Pass</span>
+                    <div class="relative flex items-center justify-between border-y border-dashed border-border/40 bg-surface-raised/40 px-5 sm:px-6 py-2.5">
+                        <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Digital Access Pass</span>
                         <span class="font-mono text-xs text-foreground font-medium">
                             {ticket.ticketCount} {ticket.ticketCount > 1 ? 'Tickets' : 'Ticket'}
                         </span>
                     </div>
 
                     <!-- Ticket Details Body -->
-                    <div class="p-6 sm:p-7 space-y-5">
+                    <div class="p-5 sm:p-7 space-y-5">
                         <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
                             <div>
                                 <p class="text-[11px] text-muted-foreground uppercase tracking-wider">Attendee</p>
@@ -209,11 +209,11 @@
                     </div>
 
                     <!-- Footer Action Buttons -->
-                    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-border/30 bg-card/90 px-6 py-4">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-border/30 bg-card/90 px-5 sm:px-6 py-3.5 sm:py-4">
                         <div class="flex items-center gap-2">
                             <button
                                 onclick={handlePrint}
-                                class="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border/30 bg-surface-raised/60 px-4 py-2 text-xs font-medium text-foreground transition-colors hover:bg-surface-raised"
+                                class="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border/30 bg-surface-raised/60 px-3.5 sm:px-4 py-2 text-xs font-medium text-foreground transition-colors hover:bg-surface-raised"
                             >
                                 <Icon icon="lucide:printer" width="13" height="13" />
                                 Print Pass
@@ -221,7 +221,7 @@
                             <a
                                 href={`/event/${ticket.event?.id}`}
                                 use:link
-                                class="inline-flex items-center gap-1.5 rounded-full border border-border/30 bg-surface-raised/60 px-4 py-2 text-xs font-medium text-foreground transition-colors hover:bg-surface-raised"
+                                class="inline-flex items-center gap-1.5 rounded-full border border-border/30 bg-surface-raised/60 px-3.5 sm:px-4 py-2 text-xs font-medium text-foreground transition-colors hover:bg-surface-raised"
                             >
                                 <Icon icon="lucide:external-link" width="13" height="13" />
                                 View Event

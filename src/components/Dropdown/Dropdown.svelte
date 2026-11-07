@@ -30,7 +30,7 @@
   </DropdownMenu.Trigger>
   <DropdownMenu.Portal>
     <DropdownMenu.Content
-      class="z-50 min-w-70 rounded-2xl border border-border/30 bg-card/80 p-1 text-card-foreground shadow-xl backdrop-blur-md outline-none"
+      class="z-50 min-w-70 max-w-[calc(100vw-2rem)] rounded-2xl border border-border/30 bg-card/80 p-1 text-card-foreground shadow-xl backdrop-blur-md outline-none"
       sideOffset={6}
       align="end"
     >

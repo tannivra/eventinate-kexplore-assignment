@@ -46,34 +46,50 @@
   <title>Events | Eventinate</title>
 </svelte:head>
 
-<section class="mx-auto w-full max-w-[calc(100vw-220px)]">
-    <div class="flex gap-x-8">
-        <div class="flex flex-col flex-1 pb-12">
-             <div class="sticky top-0 z-2 flex py-5 -mt-5 items-stretch gap-x-2 bg-transparent backdrop-blur-md rounded-2xl">
-                <input 
-                    type="text" 
-                    placeholder="Search events..."
-                    bind:value={searchQuery}
-                    class="h-[48px] grow rounded-full border border-border/30 bg-card/50 backdrop-blur-md py-2 px-6 text-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-border/60"
-                />
-                 <Dropdown
-                    options={categoryOptions}
-                    value={selectedCategory}
-                    onSelect={(value) => (selectedCategory = value)}
-                    showCounts={true}
-                 />
-                 <Dropdown
-                    options={sortOptions}
-                    value={selectedSort}
-                    onSelect={(value) => (selectedSort = value)}
-                    icon="lucide:arrow-up-down"
-                 />
-            </div>
-            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                 {#each sortedEvents as event}
-                <EventCard {event} />
-                {/each}
-            </div>
-        </div>
+<section class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="flex flex-col pb-16">
+    <!-- Search & Filter Controls -->
+    <div class="sticky top-[72px] sm:top-[84px] z-20 flex flex-col md:flex-row py-3 sm:py-4 -mt-3 sm:-mt-4 gap-2.5 bg-background/80 backdrop-blur-md rounded-2xl mb-6">
+      <input 
+        type="text" 
+        placeholder="Search events..." 
+        bind:value={searchQuery}
+        class="h-[46px] grow rounded-full border border-border/30 bg-card/60 backdrop-blur-md py-2 px-5 text-sm sm:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-border/60"
+      />
+      <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+        <Dropdown
+          options={categoryOptions}
+          value={selectedCategory}
+          onSelect={(value) => (selectedCategory = value)}
+          showCounts={true}
+        />
+        <Dropdown
+          options={sortOptions}
+          value={selectedSort}
+          onSelect={(value) => (selectedSort = value)}
+          icon="lucide:arrow-up-down"
+        />
+      </div>
     </div>
+
+    <!-- Events List / Grid -->
+    {#if sortedEvents.length === 0}
+      <div class="py-24 text-center">
+        <p class="text-lg font-semibold text-foreground">No events found</p>
+        <p class="mt-1 text-sm text-muted-foreground">Try adjusting your search query or selecting a different category.</p>
+        <button
+          onclick={() => { searchQuery = ''; selectedCategory = 'All Categories' }}
+          class="mt-4 inline-flex items-center gap-1.5 rounded-full border border-border/30 bg-card/60 px-5 py-2 text-xs font-medium text-primary hover:bg-card/90 cursor-pointer"
+        >
+          Reset Filters
+        </button>
+      </div>
+    {:else}
+      <div class="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {#each sortedEvents as event}
+          <EventCard {event} />
+        {/each}
+      </div>
+    {/if}
+  </div>
 </section>

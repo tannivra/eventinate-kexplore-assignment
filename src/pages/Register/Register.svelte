@@ -55,7 +55,7 @@
 
         isSubmitting = true
         setTimeout(() => {
-            ticketId = 'KX-' + Math.random().toString(36).substring(2, 6).toUpperCase() + '-' + Math.floor(1000 + Math.random() * 9000)
+            ticketId = 'EV-' + Math.random().toString(36).substring(2, 6).toUpperCase() + '-' + Math.floor(1000 + Math.random() * 9000)
             
             // Save ticket to localStorage
             saveTicket({
@@ -111,7 +111,7 @@
     <title>{isSuccess ? 'Registration Confirmed' : (event ? `Register for ${event.title}` : 'Register for an Event')} | Eventinate</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-[calc(100vw-220px)] pb-24" style="animation: fade-in-up 0.5s ease-out both;">
+<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24" style="animation: fade-in-up 0.5s ease-out both;">
     <!-- Back Button -->
     <div class="pb-6">
         <button
@@ -137,20 +137,20 @@
 
     {:else if event}
         <!-- Registration Form Layout -->
-        <div class="space-y-4 mb-8">
-            <h1 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        <div class="space-y-3 mb-8">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
                 Event Registration
             </h1>
-            <p class="text-sm text-muted-foreground max-w-2xl">
+            <p class="text-xs sm:text-sm text-muted-foreground max-w-2xl">
                 Secure your spot in seconds. Fill in your details below and we'll deliver your admission pass directly to your inbox.
             </p>
         </div>
 
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
             <!-- Left Form (8 cols) -->
-            <form onsubmit={handleSubmit} class="lg:col-span-8 space-y-8">
+            <form onsubmit={handleSubmit} class="lg:col-span-8 space-y-6 sm:space-y-8">
                 <!-- Attendee Details Card -->
-                <div class="rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 p-6 md:p-8 space-y-6">
+                <div class="rounded-2xl sm:rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 p-5 sm:p-7 md:p-8 space-y-6">
                     <div class="flex items-center gap-3 border-b border-border/20 pb-4">
                         <div class="flex h-9 w-9 items-center justify-center rounded-full bg-surface-raised/70 border border-border/30 text-primary">
                             <Icon icon="lucide:user" width="18" height="18" />
@@ -239,7 +239,7 @@
                 </div>
 
                 <!-- Ticket Options Card -->
-                <div class="rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 p-6 md:p-8 space-y-6">
+                <div class="rounded-2xl sm:rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 p-5 sm:p-7 md:p-8 space-y-6">
                     <div class="flex items-center gap-3 border-b border-border/20 pb-4">
                         <div class="flex h-9 w-9 items-center justify-center rounded-full bg-surface-raised/70 border border-border/30 text-primary">
                             <Icon icon="lucide:ticket" width="18" height="18" />
@@ -344,8 +344,8 @@
                     </div>
                 </div>
 
-                <!-- Terms & Submit -->
-                <div class="rounded-3xl backdrop-blur-md border border-border/30 space-y-5">
+                <!-- Terms & Submit Card -->
+                <div class="rounded-2xl sm:rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 p-5 sm:p-7 space-y-5">
                     <label class="flex cursor-pointer select-none items-start gap-3 text-xs text-muted-foreground">
                         <input type="checkbox" bind:checked={agreedToTerms} class="mt-0.5 h-4 w-4 rounded border-border/40 accent-primary" />
                         <span>I agree to the <a href="/events" use:link class="text-primary hover:underline">event rules</a> and understand that ticket confirmations will be verified at the venue entrance.</span>
@@ -354,7 +354,7 @@
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-semibold text-primary-foreground shadow-lg transition-opacity hover:opacity-90 disabled:opacity-50 cursor-pointer"
+                        class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary py-3.5 sm:py-4 text-sm font-semibold text-primary-foreground shadow-lg transition-opacity hover:opacity-90 disabled:opacity-50 cursor-pointer"
                     >
                         {#if isSubmitting}
                             <Icon icon="lucide:loader-2" width="18" height="18" class="animate-spin" />
@@ -370,12 +370,12 @@
                 </div>
             </form>
 
-            <!-- Right Sidebar / Order Summary (4 cols: narrower and taller) -->
+            <!-- Right Sidebar / Order Summary (4 cols: narrower and taller on desktop, elegant stack on mobile) -->
             <div class="lg:col-span-4">
-                <div class="sticky top-[110px] space-y-5">
+                <div class="lg:sticky lg:top-[110px] space-y-5">
                     <!-- Event Preview Card -->
-                    <div class="overflow-hidden rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 shadow-lg">
-                        <div class="relative aspect-[3/4] w-full overflow-hidden" style={`background: ${event.gradient}`}>
+                    <div class="overflow-hidden rounded-2xl sm:rounded-3xl bg-card/60 backdrop-blur-md border border-border/30 shadow-lg">
+                        <div class="relative aspect-[16/9] sm:aspect-[3/4] w-full overflow-hidden" style={`background: ${event.gradient}`}>
                             <img
                                 src={event.cover}
                                 alt={event.title}
@@ -395,11 +395,11 @@
                                 {/if}
                             </div>
                             <div class="absolute bottom-4 left-4 right-4">
-                                <h3 class="text-xl font-bold text-white leading-tight">{event.title}</h3>
+                                <h3 class="text-lg sm:text-xl font-bold text-white leading-tight">{event.title}</h3>
                             </div>
                         </div>
 
-                        <div class="p-5 space-y-4">
+                        <div class="p-4 sm:p-5 space-y-4">
                             <!-- Event Quick Meta -->
                             <div class="space-y-2.5 text-xs">
                                 <div class="flex items-center gap-2.5 text-foreground">
@@ -447,9 +447,9 @@
         </div>
     {:else}
         <!-- Event Not Found -->
-        <div class="mx-auto flex w-full max-w-md flex-col items-center justify-center py-40 text-center">
-            <h2 class="text-3xl font-bold text-foreground">Event not found</h2>
-            <p class="mt-2 text-sm text-muted-foreground">Could not find the event you are trying to register for.</p>
+        <div class="mx-auto flex w-full max-w-md px-4 flex-col items-center justify-center py-24 sm:py-36 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-foreground">Event not found</h2>
+            <p class="mt-2 text-xs sm:text-sm text-muted-foreground">Could not find the event you are trying to register for.</p>
             <a href="/events" use:link class="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground">
                 <Icon icon="lucide:arrow-left" width="16" height="16" />
                 Return to Events
