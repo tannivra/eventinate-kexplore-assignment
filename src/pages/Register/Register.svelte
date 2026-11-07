@@ -108,7 +108,7 @@
 </script>
 
 <svelte:head>
-    <title>{isSuccess ? 'Registration Confirmed' : (event ? `Register for ${event.title}` : 'Register for an Event')} | Evently</title>
+    <title>{isSuccess ? 'Registration Confirmed' : (event ? `Register for ${event.title}` : 'Register for an Event')} | Eventinate</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-[calc(100vw-220px)] pb-24" style="animation: fade-in-up 0.5s ease-out both;">

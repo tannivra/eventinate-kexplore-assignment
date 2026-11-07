@@ -1,28 +1,26 @@
-# Evently Event Management
+# Eventinate - Event Management System
 
-Evently is a responsive event discovery and registration website built with Svelte, Vite, and Tailwind CSS. Users can browse events, search and filter the catalogue, view event details, register for tickets, and manage saved digital passes.
+Eventinate is a modern, responsive event discovery and registration website built with Svelte 5, Vite, and Tailwind CSS. Users can browse curated events, search and filter the catalogue, view rich event details with live countdowns, register for passes with instant validation, and manage their local digital ticket wallet.
 
 ## Features
 
-- Featured and upcoming event sections on the home page
-- Event search, category filtering, category counts, and sorting
-- Event detail pages with pricing, venue, organizer, countdown, save, and share actions
-- Registration form with name, email, phone, ticket tier, quantity, and notes
-- Client-side validation for required fields, email, phone, terms, and event availability
-- Digital ticket confirmation after registration
-- Local Storage ticket wallet at `/tickets`
-- Ticket search, print, delete, and event navigation
-- Responsive layouts for mobile, tablet, and desktop screens
-- Reusable Button, Dropdown, EventCard, and TicketConfirmation components
+- **Home Page**: Featured and upcoming events showcase, instant search handoff, and responsive layout.
+- **Events Catalogue**: Real-time search, category filters with live event counts, and sorting (by date, name, price).
+- **Event Detail Page**: Cover hero with category badges, full event descriptions, venue location, organizer info, live date countdown, save to favorites, and native web share.
+- **Event Registration**: Dedicated registration flow linked from each event with attendee details, ticket tier selection (General Entry & VIP Pass), quantity counter, dynamic price calculation, and client-side form validation.
+- **Digital Ticket Pass & Confirmation**: Instant ticket confirmation with unique booking reference, QR badge, and printable/saveable pass.
+- **Local Ticket Wallet (`/tickets`)**: Persistent ticket storage in `localStorage` under `eventinate_tickets`. Search and filter passes, view event details, print, or cancel tickets with confirmation.
+- **Visual Design**: Subtle ambient gradient glows, dot-pattern background texture, and frosted glass cards (`backdrop-blur-md`).
+- **Clean 404 Fallback**: Dedicated not found page with navigation links.
 
 ## Tech Stack
 
-- Svelte 5
-- Vite
-- Tailwind CSS
-- Bits UI
-- Iconify
-- svelte-spa-router
+- **Svelte 5** (Runes & reactive stores)
+- **Vite 8**
+- **Tailwind CSS v4**
+- **Bits UI** (Accessible headless dropdowns)
+- **Iconify** (Lucide & Material icons)
+- **svelte-spa-router** (Client-side routing)
 
 ## Run Locally
 
@@ -37,14 +35,3 @@ Create a production build with:
 npm run build
 npm run preview
 ```
-
-## Project Structure
-
-- `src/pages/Home` contains the landing page and Home search handoff.
-- `src/pages/Events` contains search, category filtering, and sorting.
-- `src/pages/Event` contains event details and registration navigation.
-- `src/pages/Register` contains the registration form and validation.
-- `src/pages/Tickets` contains the Local Storage ticket wallet.
-- `src/components` contains reusable UI components.
-- `src/data/events.js` contains the event catalogue.
-- `src/lib/tickets.js` manages tickets stored under `kexplore_tickets` in Local Storage.

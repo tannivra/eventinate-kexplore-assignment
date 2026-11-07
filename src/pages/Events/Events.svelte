@@ -43,24 +43,11 @@
 </script>
 
 <svelte:head>
-  <title>Events | Evently</title>
+  <title>Events | Eventinate</title>
 </svelte:head>
 
 <section class="mx-auto w-full max-w-[calc(100vw-220px)]">
     <div class="flex gap-x-8">
-        <!-- <aside class="w-[250px]">
-            <div class="flex flex-col gap-y-4">
-                <div>
-                    <span class="block text-sm font-medium text-foreground">Category</span>
-                </div>
-                <div>
-                    <label for="location" class="block text-sm font-medium text-foreground">Location</label>
-                    <input type="text" id="location" name="location" placeholder="Enter location" class="mt-1 block w-full rounded-md border 
-                    border-border bg-background py-2 pl-3 pr-10 text-sm text-foreground focus:border-primary focus:outline-none 
-                    focus:ring-primary sm:text-sm" />
-                </div>
-            </div>
-        </aside> -->
         <div class="flex flex-col flex-1 pb-12">
              <div class="sticky top-0 z-2 flex py-5 -mt-5 items-stretch gap-x-2 bg-transparent backdrop-blur-md rounded-2xl">
                 <input 

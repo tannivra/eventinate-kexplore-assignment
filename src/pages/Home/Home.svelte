@@ -1,7 +1,6 @@
 <script>
     import Icon from '@iconify/svelte'
     import { link, push } from "svelte-spa-router";
-    import Button from '../../components/Button/Button.svelte'
     import EventCard from '../../components/EventCard/EventCard.svelte'
     import { featuredEvents, upcomingEvents } from '../../data/events.js'
 
@@ -14,7 +13,7 @@
 </script>
 
 <svelte:head>
-  <title>Home | Evently</title>
+  <title>Home | Eventinate</title>
 </svelte:head>
 
 <div class="flex flex-col gap-y-16 mx-auto max-w-[calc(100vw-250px)]">

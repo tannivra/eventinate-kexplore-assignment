@@ -38,11 +38,11 @@ import Icon from '@iconify/svelte'
     }
 
     function toggleSaved() {
-        const saved = JSON.parse(localStorage.getItem('kexplore_saved_events') || '[]')
+        const saved = JSON.parse(localStorage.getItem('eventinate_saved_events') || localStorage.getItem('kexplore_saved_events') || '[]')
         const updated = isSaved
             ? saved.filter((id) => id !== event.id)
             : [...saved, event.id]
-        localStorage.setItem('kexplore_saved_events', JSON.stringify(updated))
+        localStorage.setItem('eventinate_saved_events', JSON.stringify(updated))
         isSaved = !isSaved
     }
 
@@ -63,7 +63,7 @@ import Icon from '@iconify/svelte'
 
     onMount(() => {
         if (event) {
-            const saved = JSON.parse(localStorage.getItem('kexplore_saved_events') || '[]')
+            const saved = JSON.parse(localStorage.getItem('eventinate_saved_events') || localStorage.getItem('kexplore_saved_events') || '[]')
             isSaved = saved.includes(event.id)
         }
         updateCountdown()
@@ -73,7 +73,7 @@ import Icon from '@iconify/svelte'
 </script>
 
 <svelte:head>
-    <title>{event ? `${event.title} | Evently` : 'Event Not Found | Evently'}</title>
+    <title>{event ? `${event.title} | Eventinate` : 'Event Not Found | Eventinate'}</title>
 </svelte:head>
 
 {#if event}

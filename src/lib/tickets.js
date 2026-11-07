@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store'
 
-const STORAGE_KEY = 'kexplore_tickets'
+const STORAGE_KEY = 'eventinate_tickets'
+const LEGACY_STORAGE_KEY = 'kexplore_tickets'
 
 function loadFromStorage() {
   if (typeof window === 'undefined') return []
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY)
     return raw ? JSON.parse(raw) : []
   } catch (err) {
     console.error('Failed to load tickets from localStorage:', err)
